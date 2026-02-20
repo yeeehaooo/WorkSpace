@@ -1,0 +1,65 @@
+# .NET Naming Conventions
+
+AI must follow these naming conventions for .NET code.
+
+## Casing
+
+- PascalCase: class, record, enum, method, property, namespace
+- camelCase: local variable, parameter
+- _camelCase: private readonly field
+- UPPER_CASE: const
+
+## Layer Naming
+
+### Domain
+- Aggregate → {Entity}
+- ValueObject → descriptive noun
+- Exception → DomainException
+
+### Application
+- Command → {Action}Command
+- Query → {Action}Query
+- Handler → {Action}Handler
+- Result → {Action}Result
+
+### API
+- Request → {Action}Request
+- Response → {Action}Response
+- Endpoint → {Action}Endpoint
+- Mapping → {Action}Mapping
+
+### Infrastructure
+- Repository → {Entity}Repository
+- Query → {Entity}QueryService
+- DataModel → {Entity}DataModel
+- ReadModel → {Entity}ReadModel
+
+## Interfaces
+
+- Prefix with `I`
+- Example: IProductRepository, IAuthService
+
+## Exceptions
+
+- Must end with `Exception`
+- Domain → DomainException
+- Infrastructure → {Type}Exception (DatabaseException, CacheException)
+
+## Files
+
+- One public type per file
+- File name = primary type name
+- Namespace = folder structure
+- No cross-layer naming leakage
+
+## Avoid
+
+- Manager / Helper / Util / Common / Base
+- Static god classes
+- Technical-sounding abstractions without domain meaning
+- Dumping shared logic into Shared or Utils folders
+
+## Prefer
+
+- Explicit responsibility-based naming
+- Behavior-oriented class names
