@@ -1,0 +1,62 @@
+---
+name: create-repository-skill
+description: 建立 Repository 實作（EF / Dapper）
+version: 1.0.0
+---
+
+# Create Repository Skill
+
+實作 Domain Repository Interface。
+
+---
+
+## 建立步驟
+
+### Step 1 - EF Repository
+
+```csharp
+public class {Entity}Repository : I{Entity}Repository
+{
+    private readonly AppDbContext _db;
+
+    public {Entity}Repository(AppDbContext db)
+    {
+        _db = db;
+    }
+
+    public async Task AddAsync({Entity} entity)
+    {
+        await _db.Set<{Entity}>().AddAsync(entity);
+    }
+}
+```
+
+---
+
+### Step 2 - Dapper Repository
+
+```csharp
+public class {Entity}Repository : I{Entity}Repository
+{
+    private readonly IDbConnection _connection;
+
+    public async Task AddAsync({Entity} entity)
+    {
+        await _connection.ExecuteAsync("INSERT ...");
+    }
+}
+```
+
+---
+
+## ❌ 禁止
+
+- Repository 內直接呼叫外部 API
+- Repository 內處理商業邏輯
+
+---
+
+## Changelog
+
+### 1.0.0
+- Initial version

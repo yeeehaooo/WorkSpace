@@ -1,0 +1,74 @@
+---
+name: create-api-adapter-skill
+description: 建立第三方 API Adapter 結構
+version: 1.0.0
+---
+
+# Create API Adapter Skill
+
+用於整合第三方 API。
+
+---
+
+## 建立步驟
+
+### Step 1 - 建立資料夾
+
+```
+Infrastructure/External/{ProviderName}
+```
+
+---
+
+### Step 2 - 建立 Interface（Application 層）
+
+```csharp
+public interface I{ProviderName}Service
+{
+    Task<Result> ExecuteAsync();
+}
+```
+
+---
+
+### Step 3 - 建立 Implementation（Infrastructure 層）
+
+```csharp
+public class {ProviderName}Service : I{ProviderName}Service
+{
+    private readonly HttpClient _httpClient;
+
+    public {ProviderName}Service(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+    }
+
+    public async Task<Result> ExecuteAsync()
+    {
+        var response = await _httpClient.GetAsync("endpoint");
+        return Result.Success();
+    }
+}
+```
+
+---
+
+### Step 4 - DI 註冊
+
+```csharp
+services.AddHttpClient<IProviderService, ProviderService>();
+```
+
+---
+
+## ❌ 禁止
+
+- 直接在 Application 使用 HttpClient
+- 在 Controller 呼叫第三方 API
+
+---
+
+## Changelog
+
+### 1.0.0
+- Initial version

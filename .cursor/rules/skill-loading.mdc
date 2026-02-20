@@ -1,0 +1,12 @@
+---
+alwaysApply: true
+---
+
+# Skill Loading Policy
+
+- Only use skills located under `.cursor/skills` or `.claude/skills`.
+- Do not assume existence of external skill systems.
+- Load skills only when directly relevant to the task.
+- Do not summarize or restate skill content.
+- Convert skill guidance into concrete decisions.
+- Avoid loading multiple skills unnecessarily.

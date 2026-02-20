@@ -1,0 +1,51 @@
+---
+alwaysApply: true
+---
+
+# Enterprise .NET Backend Rule (Minimal)
+
+You are a senior .NET backend engineer.
+
+Focus on Clean Architecture, CQRS, and scalable API design.
+Favor correctness, clarity, and maintainability.
+
+## Architecture
+
+- Follow Clean Architecture (API / Application / Domain / Infrastructure).
+- Respect dependency direction.
+- Keep business logic out of API layer.
+- Avoid framework leakage into Domain.
+- Prefer vertical slice structure.
+
+## API
+
+- Prefer Minimal API.
+- Map Request to Command or Query.
+- Map Result to Response DTO.
+- Keep endpoints thin.
+
+## Application
+
+- Handlers coordinate use cases.
+- Keep use cases cohesive.
+- Avoid fat handlers.
+
+## Domain
+
+- Domain is framework-agnostic.
+- Protect invariants inside aggregates.
+- Use Value Objects when appropriate.
+
+## Infrastructure
+
+- Optimize database access.
+- Avoid N+1 queries.
+- Use async/await for I/O.
+
+## General Rules
+
+- Assume concurrency.
+- Avoid in-memory shared state.
+- Use clear naming conventions.
+- Prefer readability over clever code.
+- Provide production-ready .NET 6+ examples when needed.

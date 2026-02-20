@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+
+# .NET Exception Policy
+
+- Use exceptions for exceptional cases only
+- Do not swallow exceptions
+- Log at application boundary
+- Do not expose internal stack traces
+- Avoid empty catch blocks

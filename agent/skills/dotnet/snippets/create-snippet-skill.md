@@ -1,0 +1,121 @@
+---
+name: create-snippet-skill
+description: 建立可重複使用的 .NET 原子能力程式碼片段（Snippet）
+version: 1.0.0
+---
+
+# Create Snippet Skill
+
+此 Skill 用於建立「原子能力」程式碼片段。
+
+---
+
+# 定義
+
+Snippet =
+
+- 可直接複製貼上
+- 不涉及架構決策
+- 不包含流程
+- 不依賴專案特定名稱
+- 單一技術能力
+
+---
+
+# 適用場景
+
+- 建立 EF Configuration 範本
+- 建立 Result Pattern 範本
+- 建立 AsyncLocal Accessor
+- 建立 Minimal API 範本
+- 建立 DI 註冊範本
+
+---
+
+# 建立規則
+
+## 1️ 單一職責
+
+一個 snippet 只解決一件事。
+
+❌ 不可包含多步驟流程  
+❌ 不可建立整個模組  
+
+---
+
+## 2️ 不包含業務名稱
+
+禁止：
+
+```csharp
+public class UserRepository
+```
+
+允許：
+
+```csharp
+public class {Entity}Repository
+{
+}
+```
+
+---
+
+## 3️ 命名規則
+
+檔名格式：
+
+```
+{feature}-snippet.md
+```
+
+範例：
+
+- ef-entity-configuration-snippet.md
+- result-pattern-snippet.md
+- async-local-accessor-snippet.md
+
+---
+
+# Snippet 標準模板
+
+```markdown
+---
+name: snippet-name
+description: 簡述此 snippet 用途
+version: 1.0.0
+---
+
+# Snippet Title
+
+## 使用場景
+
+- 場景 1
+- 場景 2
+
+## 程式碼
+
+```csharp
+// 可直接貼上使用
+```
+
+## 注意事項
+
+- 注意 1
+- 注意 2
+```
+
+---
+
+# 禁止事項
+
+- 不得包含完整架構流程
+- 不得建立多資料夾結構
+- 不得依賴特定 Module
+
+---
+
+# Changelog
+
+## 1.0.0
+- Initial version
