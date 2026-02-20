@@ -1,0 +1,37 @@
+mappings:
+  - agent_rule: /agent/dotnet/naming.md
+    cursor_adapter: .cursor/rules/10-governance.mdc
+    priority: high
+  - agent_rule: /agent/architecture/clean-architecture.md
+    cursor_adapter: .cursor/rules/10-governance.mdc
+    priority: high
+  - agent_rule: /agent/architecture/api-design.md
+    cursor_adapter: .cursor/rules/10-governance.mdc
+    priority: high
+  - agent_rule: /agent/architecture/result-exception.md
+    cursor_adapter: .cursor/rules/10-governance.mdc
+    priority: high
+  - agent_rule: /agent/dotnet/dotnet-core.md
+    cursor_adapter: .cursor/rules/10-governance.mdc
+    priority: high
+  - agent_rule: /agent/dotnet/exception.md
+    cursor_adapter: .cursor/rules/10-governance.mdc
+    priority: high
+  - agent_rule: /agent/governance/review-policy.md
+    cursor_adapter: .cursor/rules/10-governance.mdc
+    priority: high
+  - agent_rule: /agent/security/security-guidelines.md
+    cursor_adapter: .cursor/rules/10-governance.mdc
+    priority: high
+  - agent_rule: /skills/dotnet/templates
+    cursor_adapter: .cursor/rules/90-active-skills.mdc
+    priority: medium
+  - agent_rule: /skills/dotnet/patterns
+    cursor_adapter: .cursor/rules/90-active-skills.mdc
+    priority: medium
+  - agent_rule: /skills/_shared/core
+    cursor_adapter: .cursor/rules/90-active-skills.mdc
+    priority: medium
+  - agent_rule: /skills/_shared/documentation
+    cursor_adapter: .cursor/rules/90-active-skills.mdc
+    priority: medium

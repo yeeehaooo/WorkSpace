@@ -1,0 +1,9 @@
+alwaysApply: true
+
+# Skill Loading Policy (Adapter)
+- Always apply governance from `/agent` first.
+- Then apply skill packs listed in `90-active-skills.mdc`.
+- If a request is .NET-related, prioritize `/skills/dotnet`.
+- If a request is debugging/docs-related, prioritize `/skills/_shared`.
+
+If no active skill matches, still follow `/agent` and use general engineering best practices.

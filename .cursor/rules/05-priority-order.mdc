@@ -1,0 +1,9 @@
+alwaysApply: true
+
+# Rule Priority Order
+1) `/agent/governance` and other `/agent/*` policies (highest priority)
+2) Active skill packs listed in `90-active-skills.mdc`
+3) Project-specific rules (if user opens a project repository in IDE, that repo's own `.cursor/rules` take effect)
+4) Local overrides (lowest priority)
+
+Never override governance silently. If a conflict exists, explain which rule wins and why.

@@ -41,7 +41,7 @@ Thumbs.db
 #################################################
 # Ignore ALL Projects completely
 #################################################
-Projects/**
+/Projects
 !Projects/
 !Projects/.gitkeep
 

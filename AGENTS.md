@@ -1,31 +1,39 @@
 # Workspace Skill Index
 
-This workspace may contain optional reference skills under:
+This workspace contains reusable skill packs under:
 
-- `.claude/skills`        (Claude-style reference skills)
-- `agent/skills`          (Workspace .NET skills)
+- `skills/` - Reusable skill packs organized by technology and shared capabilities
 
 These are documentation-based skills, not auto-loaded runtime plugins.
 
-## .NET Workspace Skills
+## .NET Skills
 
-- API Adapter  
-  → agent/skills/dotnet/api/create-api-adapter-skill.md
+Located under `skills/dotnet/`:
 
-- Domain Aggregate  
-  → agent/skills/dotnet/domain/create-domain-aggregate-skill.md
+- **Templates** (`skills/dotnet/templates/`)
+  - API Adapter: `create-api-adapter-skill.md`
+  - Docker Compose: `create-docker-compose-skill.md`
+  - Snippets: `create-snippet-skill.md`
 
-- Repository Pattern  
-  → agent/skills/dotnet/infrastructure/create-repository-skill.md
+- **Patterns** (`skills/dotnet/patterns/`)
+  - Domain Aggregate: `create-domain-aggregate-skill.md`
+  - Repository Pattern: `create-repository-skill.md`
+  - Clean Architecture Module: `create-clean-module-skill.md`
 
-- Clean Architecture Module  
-  → agent/skills/dotnet/architecture/create-clean-module-skill.md
+## Shared Skills
 
-- Docker / DevOps  
-  → agent/skills/dotnet/devops/create-docker-compose-skill.md
+Located under `skills/_shared/`:
 
-- Project Skill  
-  → agent/skills/shared/create-project-skill.md
+- **Core** (`skills/_shared/core/`)
+  - Project Skill: `create-project-skill.md`
+
+- **Documentation** (`skills/_shared/documentation/`)
+  - Guide Skill: `create-guide-skill.md`
+  - Coverage Report Guide: `implement-backend-coverage-report-guide.md`
+
+## Governance
+
+Governance rules are located under `/agent`. See `AGENTS_RULES.md` for details.
 
 ## Built-in Office Skills (Reference Only)
 

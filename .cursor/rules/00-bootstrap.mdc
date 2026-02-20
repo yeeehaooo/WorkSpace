@@ -1,0 +1,7 @@
+alwaysApply: true
+
+# Workspace Bootstrap
+- Governance source of truth is under `/agent`.
+- Reusable skill packs are under `/skills`.
+- Cursor rules here are adapters only (loading, priority, activation).
+- Before answering, search within `/agent` and `/skills` for the relevant policy/skill.
