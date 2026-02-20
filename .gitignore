@@ -70,3 +70,8 @@ build/
 # Source
 #################################################
 Source/**
+
+
+# workspace tooling outputs
+tools/skill-detection.log
+tools/.skill-cache.json
