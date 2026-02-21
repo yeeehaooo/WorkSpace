@@ -1,0 +1,29 @@
+---
+type: generator
+name: dotnet/generators/create-domain-aggregate
+description: 建立符合 DDD 原則的 Aggregate Root 結構（含 Repository Interface、ValueObject、Domain Event）
+version: 1.0.0
+requires:
+  - dotnet/patterns/guard
+  - dotnet/patterns/smartenum
+---
+
+# Create Domain Aggregate
+
+此 Skill 用於建立一個完整且符合 DDD 原則的 Aggregate Root 結構。
+
+---
+
+# 🎯 目標
+
+建立：
+
+- Aggregate Root
+- Repository Interface
+- ValueObject（可選）
+- Domain Event（可選）
+- Domain Exception（可選）
+
+---
+
+# 📁 建立目錄結構

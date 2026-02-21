@@ -1,31 +1,38 @@
 # Governance Policy
 
+This document defines how governance rules exist and evolve.
+
+---
+
 ## Rule Types
 
-### Hard Rules (不可覆蓋)
-- Architecture principles (Clean Architecture, CQRS)
+### Hard Rules (Cannot be overridden)
+
+- Architecture principles
 - Security guidelines
 - Naming conventions
 - Exception handling policy
+- Layer boundaries
 
-### Soft Rules (可專案 override)
+### Soft Rules (Project configurable)
+
 - Code style preferences
 - Testing strategies
-- Performance optimization approaches
+- Performance optimizations
+
+---
 
 ## Modification Policy
 
-### Who Can Modify
-- Only designated maintainers can modify agent rules
-- Changes require team consensus
+- Only designated maintainers may modify governance.
+- All changes require PR and review.
+- Breaking changes require version increment (v2).
+- All changes must update change-log.md.
 
-### Change Process
-- All changes must go through PR + Review
-- Impact assessment required
-- Update change-log.md with version bump
-- Tag governance version after approval
+---
 
 ## Freeze Mechanism
-- Hard Rules are frozen and cannot be overridden by projects
-- Soft Rules can be overridden with explicit project-level configuration
-- Conflicts must be documented and resolved through governance review
+
+- Hard Rules cannot be overridden by projects.
+- Soft Rules may be configured via project-profile.
+- Conflicts must be resolved through governance review.

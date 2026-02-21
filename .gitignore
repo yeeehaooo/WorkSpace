@@ -41,9 +41,8 @@ Thumbs.db
 #################################################
 # Ignore ALL Projects completely
 #################################################
-/Projects
-!Projects/
-!Projects/.gitkeep
+/Projects/*
+!/Projects/.gitkeep
 
 #################################################
 # .NET
@@ -70,8 +69,3 @@ build/
 # Source
 #################################################
 Source/**
-
-
-# workspace tooling outputs
-tools/skill-detection.log
-tools/.skill-cache.json

@@ -1,0 +1,18 @@
+# Clean Structure Strategy
+
+## Purpose
+Layered architecture with vertical slice.
+
+## Layout
+API/
+Application/
+Domain/
+Infrastructure/
+
+## Characteristics
+- Strict layer separation
+- Domain is framework-agnostic
+- CQRS supported
+
+## Compatible Governance
+- Requires agent v1

@@ -171,8 +171,8 @@ API → Application → Domain
 Infrastructure → Domain
 ```
 
-❌ Domain 不可依賴 Infrastructure  
-❌ Application 不可依賴 API  
+❌ Domain 不可依賴 Infrastructure
+❌ Application 不可依賴 API
 
 ---
 
