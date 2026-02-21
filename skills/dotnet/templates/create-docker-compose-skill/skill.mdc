@@ -1,16 +1,37 @@
 ---
-name: create-docker-compose-skill
-description: 建立 Docker Compose 結構
-version: 1.0.0
+name: create-docker-compose
+description: Create Docker Compose structure
+type: template
+version: 1.2.1
 ---
 
-# Create Docker Compose Skill
+# Create Docker Compose
 
-建立基礎容器環境。
+## Purpose
 
----
+Create basic containerized environment structure.
 
-## 建立 docker-compose.yml
+## Scope
+
+Applies to:
+- Docker-based deployments
+- Local development environments
+
+## Rules
+
+- Use environment variables for configuration
+- Do not hard-code connection strings in containers
+- Define services clearly
+- Use appropriate image versions
+
+## Anti-Patterns
+
+- Hard-coded connection strings in containers
+- No environment variable usage
+- Missing service definitions
+- Using latest tag without version
+
+## Minimal Example
 
 ```yaml
 version: '3.9'
@@ -20,23 +41,11 @@ services:
     build: .
     ports:
       - "5000:8080"
+    environment:
+      - ConnectionString=${CONNECTION_STRING}
 
   seq:
-    image: datalust/seq
+    image: datalust/seq:latest
     ports:
       - "5341:80"
 ```
-
----
-
-## 注意事項
-
-- 不要在容器內寫死連線字串
-- 使用環境變數
-
----
-
-## Changelog
-
-### 1.0.0
-- Initial version

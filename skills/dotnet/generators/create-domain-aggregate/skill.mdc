@@ -1,29 +1,65 @@
 ---
+name: create-domain-aggregate
+description: Create DDD Aggregate Root structure with Repository Interface, ValueObject, and Domain Event
 type: generator
-name: dotnet/generators/create-domain-aggregate
-description: 建立符合 DDD 原則的 Aggregate Root 結構（含 Repository Interface、ValueObject、Domain Event）
-version: 1.0.0
-requires:
-  - dotnet/patterns/guard
-  - dotnet/patterns/smartenum
+version: 1.2.1
 ---
 
 # Create Domain Aggregate
 
-此 Skill 用於建立一個完整且符合 DDD 原則的 Aggregate Root 結構。
+## Purpose
 
----
+Create a complete DDD Aggregate Root structure following DDD principles.
 
-# 🎯 目標
+## Scope
 
-建立：
+Applies to:
+- Domain Layer
+- DDD projects
 
-- Aggregate Root
-- Repository Interface
-- ValueObject（可選）
-- Domain Event（可選）
-- Domain Exception（可選）
+## Rules
 
----
+- Create Aggregate Root class
+- Create Repository Interface
+- Create ValueObject (optional)
+- Create Domain Event (optional)
+- Create Domain Exception (optional)
+- Aggregate Root must have identity
+- Aggregate Root enforces business invariants
 
-# 📁 建立目錄結構
+## Anti-Patterns
+
+- Aggregate Root depending on Infrastructure
+- Aggregate Root with framework references
+- Repository Interface in Infrastructure layer
+- Business logic outside Aggregate Root
+
+## Minimal Example
+
+```csharp
+// Aggregate Root
+public class {Entity} : AggregateRoot
+{
+    public Guid Id { get; private set; }
+    // Properties and business methods
+}
+
+// Repository Interface
+public interface I{Entity}Repository
+{
+    Task<{Entity}?> GetByIdAsync(Guid id);
+    Task AddAsync({Entity} entity);
+}
+
+// ValueObject (optional)
+public class {ValueObject} : ValueObject
+{
+    // Immutable value object
+}
+
+// Domain Event (optional)
+public class {Entity}CreatedEvent : IDomainEvent
+{
+    public Guid {Entity}Id { get; init; }
+}
+```

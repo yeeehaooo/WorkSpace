@@ -103,10 +103,18 @@
 **組織方式：**
 - `skills/_shared/` - 跨技術共享技能
 - `skills/dotnet/` - .NET 特定技能
-  - `structures/` - 架構結構（clean、dmis）
-  - `patterns/` - 設計模式
-  - `templates/` - 模板
+  - `structures/` - 架構結構（clean、dmis）- 定義專案結構和層級組織
+  - `patterns/` - 設計模式 - 行為模式擴展，對現有架構「加上某種設計能力」
+  - `templates/` - 模板 - 可重用的程式碼模板和片段
+  - `generators/` - 生成器 - 建立完整模組的生成工具
 - `skills/meta/` - 技能元資料
+
+**Patterns 定位說明：**
+- Patterns 是**行為模式擴展**，不是 generator
+- Patterns 不產生專案結構，不建立完整模組
+- Patterns 只定義行為規則和實作方式
+- Patterns 可組合使用（如 DMIS structure + unit-of-work pattern + outbox pattern）
+- 每個 pattern 都是獨立的 folder-based skill，使用統一的 `skill.mdc` 格式
 
 **禁止：**
 - 不包含治理規則（屬於 agent）
@@ -118,6 +126,38 @@
 - 不要修改現有技能（如 `dmis`）
 - 如果需要新版本，建立新資料夾（如 `dmis-v2`）
 - 專案自己改 profile 來選擇版本
+
+**Patterns 詳細說明：**
+- Patterns 位於 `skills/dotnet/patterns/` 目錄
+- 每個 pattern 是一個 folder-based skill，包含 `skill.mdc` 文件
+- Patterns 是**行為模式擴展**，不是 generator
+- Patterns 不產生專案結構，不建立完整模組
+- Patterns 只定義行為規則和實作方式
+- Patterns 可組合使用，形成 Architecture Composition Engine
+
+**Patterns 使用範例：**
+```json
+{
+  "governance": "v1",
+  "skills": [
+    "dotnet/structures/dmis",
+    "dotnet/patterns/unit-of-work",
+    "dotnet/patterns/outbox",
+    "dotnet/patterns/execution-tracking"
+  ]
+}
+```
+
+**可用的 Patterns：**
+- `unit-of-work` - 交易邊界控制
+- `domain-event` - 領域事件發布
+- `transaction-policy` - 交易策略定義
+- `caching-strategy` - 快取策略
+- `pipeline-decorator` - 管道裝飾器
+- `execution-tracking` - 執行追蹤
+- `outbox` - 交易式輸出盒
+- `retry-policy` - 重試策略
+- `result-wrapper` - 結果包裝器
 
 #### `.claude/skills/` - 外部官方技能
 

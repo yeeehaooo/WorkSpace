@@ -1,0 +1,70 @@
+---
+name: unit-of-work
+description: Provide transactional boundary control for write operations
+type: pattern
+version: 1.2.1
+---
+
+# Unit of Work Pattern
+
+## Purpose
+
+Provide transactional boundary control for write operations while maintaining Clean Architecture layer separation.
+
+## Scope
+
+Applies to:
+- Application Layer
+- Infrastructure Layer
+
+## Rules
+
+- Handler controls transaction boundary via `BeginAsync()` / `CommitAsync()` / `RollbackAsync()`
+- Repository never commits or manages transactions
+- `IUnitOfWork` defined in Application layer, implemented in Infrastructure layer
+- Infrastructure uses `IDbSession` internally (not exposed to Application)
+- Automatic rollback on `Dispose()` if transaction started but not committed
+- Nested transactions must be supported (same instance per request via Scoped DI)
+
+## Anti-Patterns
+
+- Auto transaction middleware that starts transaction for every request
+- Repository calling `SaveChanges()` or `CommitAsync()`
+- Application layer depending on `IDbSession` directly
+- Transaction started in constructor instead of explicit `BeginAsync()`
+- Handler not controlling transaction boundary
+
+## Minimal Example
+
+```csharp
+// Application Layer
+public interface IUnitOfWork : IDisposable
+{
+  Task BeginAsync(CancellationToken cancellationToken = default);
+  Task CommitAsync(CancellationToken cancellationToken = default);
+  Task RollbackAsync(CancellationToken cancellationToken = default);
+}
+
+// Infrastructure Layer
+public class DapperUnitOfWork : IUnitOfWork
+{
+  private readonly IDbSession _session;
+  // Implementation details...
+}
+
+// Handler Usage
+public async Task Handle(CreateOrderCommand cmd)
+{
+  await _uow.BeginAsync();
+  try
+  {
+    await _repo.AddAsync(order);
+    await _uow.CommitAsync();
+  }
+  catch
+  {
+    await _uow.RollbackAsync();
+    throw;
+  }
+}
+```

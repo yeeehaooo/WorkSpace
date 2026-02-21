@@ -1,7 +1,7 @@
 ---
 name: implement-backend-coverage-report-guide
 description: 建立 .NET 後端專案測試覆蓋率報告（含 HTML 報表）
-version: 1.0.0
+version: 1.2.1
 ---
 
 # Backend Coverage Report Guide

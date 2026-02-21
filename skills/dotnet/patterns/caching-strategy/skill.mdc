@@ -1,0 +1,55 @@
+---
+name: caching-strategy
+description: Define explicit caching strategies for different data access patterns and consistency requirements
+type: pattern
+version: 1.2.1
+---
+
+# Caching Strategy Pattern
+
+## Purpose
+
+Define explicit caching strategies for different data access patterns and consistency requirements.
+
+## Scope
+
+Applies to:
+- Application Layer
+- Infrastructure Layer
+
+## Rules
+
+- Cache is never source of truth
+- Explicit cache invalidation strategies
+- Appropriate TTL per data type
+- Handle cache misses gracefully
+- Support cache warming when needed
+- Caching strategy interfaces defined in Application layer
+- Strategy implementations in Infrastructure layer (Redis, in-memory, etc.)
+
+## Anti-Patterns
+
+- Treating cache as source of truth
+- No cache invalidation strategy
+- Too long or too short TTL
+- Caching everything without strategy
+- Ignoring cache consistency requirements
+- Cache keys without namespace/prefix
+
+## Minimal Example
+
+```csharp
+// Application Layer
+public interface ICachingStrategy
+{
+  Task<T?> GetAsync<T>(string key);
+  Task SetAsync<T>(string key, T value, TimeSpan? ttl = null);
+  Task InvalidateAsync(string key);
+}
+
+// Infrastructure Layer
+public class RedisCachingStrategy : ICachingStrategy
+{
+  // Implementation...
+}
+```

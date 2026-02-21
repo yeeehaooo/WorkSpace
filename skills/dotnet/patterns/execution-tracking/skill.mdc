@@ -1,0 +1,53 @@
+---
+name: execution-tracking
+description: Track handler execution for observability, auditing, and debugging
+type: pattern
+version: 1.2.1
+---
+
+# Execution Tracking Pattern
+
+## Purpose
+
+Track handler execution for observability, auditing, and debugging.
+
+## Scope
+
+Applies to:
+- Application Layer
+- Infrastructure Layer
+
+## Rules
+
+- Track execution time for performance monitoring
+- Record input parameters and results (sanitized)
+- Track errors and exceptions
+- Support correlation IDs for request tracing
+- Configurable tracking levels (none, errors only, full)
+- Tracking interface defined in Application layer
+- Tracking implementations in Infrastructure layer
+
+## Anti-Patterns
+
+- Tracking sensitive data (passwords, tokens)
+- Over-tracking causing performance issues
+- No correlation IDs for distributed tracing
+- Tracking implementation details instead of business events
+- Ignoring privacy and compliance requirements
+
+## Minimal Example
+
+```csharp
+// Application Layer
+public interface IExecutionTracker
+{
+  Task TrackAsync(string operation, object? input, object? output, TimeSpan duration);
+  Task TrackErrorAsync(string operation, object? input, Exception error);
+}
+
+// Infrastructure Layer
+public class LoggingExecutionTracker : IExecutionTracker
+{
+  // Implementation...
+}
+```

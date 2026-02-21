@@ -1,19 +1,39 @@
 ---
-name: create-repository-skill
-description: 建立 Repository 實作（EF / Dapper）
-version: 1.0.0
+name: create-repository
+description: Create Repository implementation (EF / Dapper)
+type: generator
+version: 1.2.1
 ---
 
 # Create Repository Skill
 
-實作 Domain Repository Interface。
+## Purpose
 
----
+Implement Domain Repository Interface with EF Core or Dapper.
 
-## 建立步驟
+## Scope
 
-### Step 1 - EF Repository
+Applies to:
+- Infrastructure Layer
+- Projects using Repository pattern
 
+## Rules
+
+- Repository implements interface defined in Domain layer
+- Repository only performs data operations
+- Repository does NOT commit or manage transactions
+- Support both EF Core and Dapper implementations
+
+## Anti-Patterns
+
+- Repository calling external API directly
+- Repository containing business logic
+- Repository calling `SaveChanges()` or `CommitAsync()`
+- Repository managing transactions
+
+## Minimal Example
+
+**EF Repository:**
 ```csharp
 public class {Entity}Repository : I{Entity}Repository
 {
@@ -31,10 +51,7 @@ public class {Entity}Repository : I{Entity}Repository
 }
 ```
 
----
-
-### Step 2 - Dapper Repository
-
+**Dapper Repository:**
 ```csharp
 public class {Entity}Repository : I{Entity}Repository
 {
@@ -46,17 +63,3 @@ public class {Entity}Repository : I{Entity}Repository
     }
 }
 ```
-
----
-
-## ❌ 禁止
-
-- Repository 內直接呼叫外部 API
-- Repository 內處理商業邏輯
-
----
-
-## Changelog
-
-### 1.0.0
-- Initial version

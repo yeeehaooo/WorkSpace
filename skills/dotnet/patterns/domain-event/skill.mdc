@@ -1,0 +1,62 @@
+---
+name: domain-event
+description: Enable domain entities to publish events when significant business events occur
+type: pattern
+version: 1.2.1
+---
+
+# Domain Event Pattern
+
+## Purpose
+
+Enable domain entities to publish events when significant business events occur, allowing decoupled side effects.
+
+## Scope
+
+Applies to:
+- Domain Layer
+- Application Layer
+- Infrastructure Layer
+
+## Rules
+
+- Domain events represent business facts that have occurred
+- Events raised by aggregates, not by application services
+- Events dispatched after transaction commit (to ensure consistency)
+- Multiple handlers can react to the same event
+- Handlers should be idempotent when possible
+- `IDomainEvent` interface defined in Domain layer
+- `IDomainEventDispatcher` defined in Application layer, implemented in Infrastructure
+
+## Anti-Patterns
+
+- Raising events from application services instead of domain entities
+- Dispatching events before transaction commit
+- Using events for synchronous command flow (use return values instead)
+- Events containing too much data or implementation details
+- Handlers with business logic instead of side effects
+
+## Minimal Example
+
+```csharp
+// Domain Layer
+public interface IDomainEvent { }
+
+public class OrderCreatedEvent : IDomainEvent
+{
+  public Guid OrderId { get; init; }
+  public Guid CustomerId { get; init; }
+}
+
+// Application Layer
+public interface IDomainEventDispatcher
+{
+  Task DispatchAsync<T>(T domainEvent) where T : IDomainEvent;
+}
+
+// Handler
+public class SendOrderConfirmationHandler : IDomainEventHandler<OrderCreatedEvent>
+{
+  public async Task Handle(OrderCreatedEvent evt) { /* ... */ }
+}
+```

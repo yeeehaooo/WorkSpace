@@ -1,0 +1,63 @@
+---
+name: pipeline-decorator
+description: Build cross-cutting concern pipelines using decorator pattern for handlers
+type: pattern
+version: 1.2.1
+---
+
+# Pipeline Decorator Pattern
+
+## Purpose
+
+Build cross-cutting concern pipelines using decorator pattern for handlers.
+
+## Scope
+
+Applies to:
+- Application Layer
+- Infrastructure Layer
+
+## Rules
+
+- One decorator per concern
+- Decorators can be composed
+- Decorators wrap handlers, not replace them
+- Decorator order matters (e.g., validation before transaction)
+- Decorators registered in DI container
+- Base decorator classes in Application layer
+- Concrete decorators in Infrastructure layer
+
+## Anti-Patterns
+
+- God decorator that does everything
+- Decorators with business logic
+- Decorators that break handler contract
+- Ignoring decorator execution order
+- Decorators that depend on specific handler implementations
+
+## Minimal Example
+
+```csharp
+// Application Layer
+public interface ICommandHandler<TCommand>
+{
+  Task HandleAsync(TCommand command);
+}
+
+public abstract class CommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
+{
+  protected readonly ICommandHandler<TCommand> _next;
+  // Decorator logic...
+}
+
+// Infrastructure Layer
+public class LoggingDecorator<TCommand> : CommandHandlerDecorator<TCommand>
+{
+  public override async Task HandleAsync(TCommand command)
+  {
+    // Logging before
+    await _next.HandleAsync(command);
+    // Logging after
+  }
+}
+```

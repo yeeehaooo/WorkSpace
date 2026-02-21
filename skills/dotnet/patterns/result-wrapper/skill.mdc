@@ -1,0 +1,61 @@
+---
+name: result-wrapper
+description: Use Result wrapper pattern for explicit error handling without exceptions
+type: pattern
+version: 1.2.1
+---
+
+# Result Wrapper Pattern
+
+## Purpose
+
+Use `Result<T>` wrapper pattern for explicit error handling without exceptions.
+
+## Scope
+
+Applies to:
+- Domain Layer
+- Application Layer
+- Infrastructure Layer
+
+## Rules
+
+- Use `Result<T>` for business errors (validation, business rules)
+- Use exceptions for system errors (null reference, out of memory)
+- `Result<T>` is immutable
+- Chain operations using `Map`, `Bind`, `Match` methods
+- Extract values explicitly (no implicit unwrapping)
+- `Result<T>` type defined in Application layer
+- Domain operations return `Result<T>` for business failures
+
+## Anti-Patterns
+
+- Using exceptions for business errors
+- Implicit unwrapping of `Result<T>` values
+- Mixing business errors with system errors
+- Not handling `Result<T>` failures
+- Returning `Result<T>` from infrastructure (should convert exceptions)
+
+## Minimal Example
+
+```csharp
+// Application Layer
+public class Result<T>
+{
+  public bool IsSuccess { get; }
+  public T? Value { get; }
+  public string? Error { get; }
+
+  public static Result<T> Success(T value) => new(true, value, null);
+  public static Result<T> Failure(string error) => new(false, default, error);
+}
+
+// Domain Usage
+public Result<Order> CreateOrder(CreateOrderRequest request)
+{
+  if (request.Items.Count == 0)
+    return Result<Order>.Failure("Order must have at least one item");
+
+  return Result<Order>.Success(new Order(...));
+}
+```

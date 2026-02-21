@@ -1,0 +1,59 @@
+---
+name: outbox
+description: Ensure reliable event publishing and message delivery by storing events in the same transaction as domain changes
+type: pattern
+version: 1.2.1
+---
+
+# Outbox Pattern
+
+## Purpose
+
+Ensure reliable event publishing and message delivery by storing events in the same transaction as domain changes.
+
+## Scope
+
+Applies to:
+- Domain Layer
+- Application Layer
+- Infrastructure Layer
+
+## Rules
+
+- Events stored in outbox within same transaction as domain changes
+- Background worker publishes events from outbox
+- Idempotent publishing (handle duplicate deliveries)
+- Mark events as published after successful delivery
+- Retry failed publications with exponential backoff
+- `IOutbox` interface defined in Application layer
+- Outbox implementation in Infrastructure layer
+
+## Anti-Patterns
+
+- Publishing events directly without outbox (dual-write problem)
+- Publishing events before transaction commit
+- No idempotency handling in event handlers
+- No retry mechanism for failed publications
+- Publishing events synchronously (blocking transaction)
+
+## Minimal Example
+
+```csharp
+// Application Layer
+public interface IOutbox
+{
+  Task AddAsync<T>(T domainEvent) where T : IDomainEvent;
+}
+
+// Infrastructure Layer
+public class DatabaseOutbox : IOutbox
+{
+  // Store event in outbox table within transaction
+}
+
+// Background Worker
+public class OutboxPublisher : BackgroundService
+{
+  // Publish events from outbox table
+}
+```

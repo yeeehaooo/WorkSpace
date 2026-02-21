@@ -1,18 +1,42 @@
-# Clean Structure Strategy
+---
+name: clean
+description: Layered architecture with vertical slice
+type: structure
+version: 1.2.1
+---
+
+# Clean Structure
 
 ## Purpose
-Layered architecture with vertical slice.
 
-## Layout
+Layered architecture with vertical slice organization.
+
+## Scope
+
+Applies to:
+- Clean Architecture projects
+- Projects requiring strict layer separation
+
+## Rules
+
+- Four-layer architecture: API, Application, Domain, Infrastructure
+- Strict layer separation
+- Domain is framework-agnostic
+- CQRS supported
+- Vertical slice organization in API layer
+
+## Anti-Patterns
+
+- Domain depending on outer layers
+- Business logic in Controllers
+- Framework dependencies in Domain layer
+- Direct Infrastructure access from API layer
+
+## Minimal Example
+
+```
 API/
 Application/
 Domain/
 Infrastructure/
-
-## Characteristics
-- Strict layer separation
-- Domain is framework-agnostic
-- CQRS supported
-
-## Compatible Governance
-- Requires agent v1
+```

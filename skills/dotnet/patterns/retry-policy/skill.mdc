@@ -1,0 +1,54 @@
+---
+name: retry-policy
+description: Define explicit retry policies for handling transient failures in external dependencies
+type: pattern
+version: 1.2.1
+---
+
+# Retry Policy Pattern
+
+## Purpose
+
+Define explicit retry policies for handling transient failures in external dependencies.
+
+## Scope
+
+Applies to:
+- Application Layer
+- Infrastructure Layer
+
+## Rules
+
+- Retry only transient failures (network errors, timeouts)
+- Do not retry non-retryable failures (validation errors, authentication failures)
+- Use exponential backoff to prevent retry storms
+- Limit maximum retry attempts
+- Support circuit breaker pattern for repeated failures
+- Retry policy interfaces defined in Application layer
+- Policy implementations in Infrastructure layer
+
+## Anti-Patterns
+
+- Retrying all exceptions
+- No backoff strategy (immediate retries)
+- Infinite retry loops
+- Retrying non-retryable failures
+- No circuit breaker for repeated failures
+
+## Minimal Example
+
+```csharp
+// Application Layer
+public interface IRetryPolicy
+{
+  Task<T> ExecuteAsync<T>(Func<Task<T>> operation);
+}
+
+// Infrastructure Layer
+public class ExponentialBackoffRetryPolicy : IRetryPolicy
+{
+  private readonly int _maxRetries;
+  private readonly TimeSpan _initialDelay;
+  // Implementation...
+}
+```

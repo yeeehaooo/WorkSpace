@@ -1,252 +1,93 @@
 ---
-type: structure
-name: dotnet/structures/dmis
+name: dmis
 description: DMIS Enterprise Backend Structure (Clean Architecture + DDD + CQRS + Vertical Slice)
+type: structure
+version: 1.2.1
 ---
 
 # DMIS Enterprise Structure
 
-## Philosophy
+## Purpose
 
-DMIS is an opinionated enterprise backend structure built on:
+Enterprise backend structure built on Clean Architecture, DDD, CQRS, and Vertical Slice API Design with Dapper-first persistence.
 
-- Clean Architecture
-- Domain-Driven Design (DDD)
-- CQRS
-- Vertical Slice API Design
-- Dapper-first persistence strategy
+## Scope
 
-This structure enforces strict layer boundaries and responsibility separation.
+Applies to:
+- Enterprise backend projects
+- Clean Architecture projects
+- DDD projects
+- CQRS projects
 
----
+## Rules
 
-# Tech Stack
+### Architectural Layers
 
-- .NET 10
-- Dapper
-- EF Core
-- Redis
-- JWT
-- Serilog
-
----
-
-# Architectural Layers
-
-The system MUST follow a four-layer architecture:
-
+Four-layer architecture:
 1. Api
 2. Application
 3. Domain
 4. Infrastructure
 
-Dependency direction MUST follow:
+Dependency direction:
+- Api → Application → Domain
+- Infrastructure → Application / Domain
+- Domain MUST NOT depend on any outer layer
 
-Api → Application → Domain
-Infrastructure → Application / Domain
-Domain MUST NOT depend on any outer layer.
+### Layer Responsibilities
 
----
-
-# Layer Responsibilities
-
-## Api Layer
-
+**Api Layer:**
 - Entry point (ASP.NET Core Web API)
-- Vertical slice module organization
+- Vertical slice module organization: `Modules/{ModuleName}/{UseCase}/`
 - Endpoint / Request / Response separation
 - Mapping between API DTO and Application DTO
-- Pipeline configuration
-- Authentication filter
-- Logging middleware
-- Workflow initialization
+- Pipeline configuration, authentication, logging
 
-Api MUST NOT contain business logic.
-
----
-
-## Application Layer
-
+**Application Layer:**
 - Use case coordination
-- Command / Query handlers
-- Result abstraction
-- UnitOfWork abstraction
-- Workflow abstraction
+- Command / Query handlers: `Modules/{ModuleName}/Commands/` and `Queries/`
+- Result abstraction, UnitOfWork abstraction, Workflow abstraction
 - Decorator-based cross-cutting concerns
 
-Application MUST NOT depend on Infrastructure implementations.
+**Domain Layer:**
+- Aggregate Roots, Value Objects, Domain Guards, Smart Enums
+- Domain Exceptions, Error Codes
+- Pure business rules only, no framework references
 
----
-
-## Domain Layer
-
-- Aggregate Roots
-- Value Objects
-- Domain Guards
-- Smart Enums
-- Domain Exceptions
-- Error Codes
-
-Domain MUST contain pure business rules only.
-No framework references allowed.
-
----
-
-## Infrastructure Layer
-
+**Infrastructure Layer:**
 - Dapper implementation (primary persistence)
 - EF Core (optional secondary ORM)
-- Repository implementation
-- Query Services (Read side of CQRS)
-- Redis cache implementation
-- JWT authentication service
-- Encryption services (RSA / AES-GCM)
-- Logging implementation (Serilog)
+- Repository implementation, Query Services (Read side of CQRS)
+- Redis cache, JWT authentication, encryption services, logging
 
-Infrastructure MUST implement Application abstractions.
+### Folder Organization
 
----
+**Api:** `Modules/{ModuleName}/{UseCase}/` (Endpoint, Request, Response, Mapping)
 
-# Folder Organization Rules
+**Application:** `Modules/{ModuleName}/Commands/` and `Queries/`
 
-## Api Layer
+**Domain:** `Modules/{ModuleName}/` and `Kernel/` (AggregateRoot, IRepository, Guards, SmartEnums, ErrorCodes)
 
-Must follow vertical slice:
+**Infrastructure:** `Persistence/` (Dappers, Repositories, QueryServices, ReadModels, DataModels), `Security/`, `Caching/`, `Logging/`
 
-```
-Modules/{ModuleName}/{UseCase}/
-- Endpoint
-- Request
-- Response
-- Mapping
-```
+### Persistence Strategy
 
-No shared Controller dumping allowed.
+- Primary: Dapper
+- Transaction handling via UnitOfWork abstraction
+- CQRS separation: Write → Repository, Read → QueryService + ReadModel
 
-**Folder Conventions:**
-- API/Modules/{Feature}/{Action}
-
----
-
-## Application Layer
-
-```
-Modules/{ModuleName}/Commands/
-Modules/{ModuleName}/Queries/
-```
-
-Each use case must have:
-
-- Command or Query
-- Handler
-- Result
-
-**Folder Conventions:**
-- Application/Modules/{Feature}/Commands
-
----
-
-## Domain Layer
-
-```
-Modules/{ModuleName}/
-Kernel/
-- AggregateRoot
-- IRepository
-- Guards
-- SmartEnums
-- ErrorCodes
-```
-
-Domain must not reference:
-- ASP.NET
-- EF Core
-- Dapper
-- Logging framework
-
----
-
-## Infrastructure Layer
-
-```
-Persistence/
-- Dappers/
-- Repositories/
-- QueryServices/
-- ReadModels/
-- DataModels/
-
-Security/
-- Authentication
-- Cryptography
-- Integrity
-
-Caching/
-Logging/
-```
-
-**Folder Conventions:**
-- Infrastructure/Persistence/Dappers
-
----
-
-# Persistence Strategy
-
-Primary persistence: Dapper
-Transaction handling via UnitOfWork abstraction.
-
-CQRS separation:
-
-- Write → Repository
-- Read → QueryService + ReadModel
-
----
-
-# Cross-Cutting Strategy
-
-Cross-cutting concerns MUST use:
+### Cross-Cutting Strategy
 
 - Decorator pattern (Application layer)
 - Middleware / Filters (Api layer)
+- No business logic in middleware
 
-No business logic allowed in middleware.
-
----
-
-# What DMIS Assumes
-
-This structure assumes usage of the following pattern skills:
-
-- result pattern
-- guard pattern
-- unit-of-work pattern
-- workflow pattern
-- smart-enum pattern
-
-These are NOT embedded here.
-They must be explicitly selected in project-profile.json.
-
----
-
-# Non-Goals
-
-DMIS does NOT define:
-
-- Concrete business entities
-- Database schema
-- DevOps pipeline
-- CI/CD configuration
-
-It only defines architectural structure.
-
----
-
-# Enforcement Rules
-
-The following are considered violations:
+## Anti-Patterns
 
 - Domain referencing Infrastructure
 - Api referencing Infrastructure directly
 - Business logic inside Controllers
 - EF DbContext used directly inside Application
 - Dapper used outside Infrastructure
+- Framework references in Domain layer
+- Shared Controller dumping in Api layer

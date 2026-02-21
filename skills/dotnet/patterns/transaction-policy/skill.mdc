@@ -1,0 +1,53 @@
+---
+name: transaction-policy
+description: Define explicit transaction policies for different operation types and consistency requirements
+type: pattern
+version: 1.2.1
+---
+
+# Transaction Policy Pattern
+
+## Purpose
+
+Define explicit transaction policies for different operation types and consistency requirements.
+
+## Scope
+
+Applies to:
+- Application Layer
+- Infrastructure Layer
+
+## Rules
+
+- Explicit transaction policies per operation type
+- Support for different isolation levels when needed
+- Policy enforcement via decorators or middleware
+- Policies can be composed for complex scenarios
+- Policy interfaces defined in Application layer
+- Policy implementations in Infrastructure layer
+
+## Anti-Patterns
+
+- One-size-fits-all transaction policy
+- Implicit transaction boundaries
+- Ignoring isolation level requirements
+- Over-using distributed transactions
+- Policies with business logic
+
+## Minimal Example
+
+```csharp
+// Application Layer
+public interface ITransactionPolicy
+{
+  IsolationLevel IsolationLevel { get; }
+  TimeSpan? Timeout { get; }
+}
+
+// Infrastructure Layer
+public class ReadCommittedPolicy : ITransactionPolicy
+{
+  public IsolationLevel IsolationLevel => IsolationLevel.ReadCommitted;
+  public TimeSpan? Timeout => TimeSpan.FromSeconds(30);
+}
+```

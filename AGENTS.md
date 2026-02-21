@@ -16,9 +16,17 @@ Located under `skills/dotnet/`:
   - Snippets: `create-snippet-skill.md`
 
 - **Patterns** (`skills/dotnet/patterns/`)
-  - Domain Aggregate: `create-domain-aggregate-skill.md`
-  - Repository Pattern: `create-repository-skill.md`
-  - Clean Architecture Module: `create-clean-module-skill.md`
+  - Unit of Work: `unit-of-work/skill.mdc`
+  - Domain Event: `domain-event/skill.mdc`
+  - Transaction Policy: `transaction-policy/skill.mdc`
+  - Caching Strategy: `caching-strategy/skill.mdc`
+  - Pipeline Decorator: `pipeline-decorator/skill.mdc`
+  - Execution Tracking: `execution-tracking/skill.mdc`
+  - Outbox: `outbox/skill.mdc`
+  - Retry Policy: `retry-policy/skill.mdc`
+  - Result Wrapper: `result-wrapper/skill.mdc`
+
+  **Note:** Patterns are behavioral extensions, not generators. They add design capabilities to existing architecture without creating project structure or full modules.
 
 ## Shared Skills
 

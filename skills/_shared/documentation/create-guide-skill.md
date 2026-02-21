@@ -1,135 +1,87 @@
 ---
 name: create-guide-skill
-description: 建立 .NET 組合能力 Guide（多步驟完整實作流程）
-version: 1.0.0
+description: Create .NET composite capability Guide (multi-step implementation flow)
+type: template
+version: 1.2.1
 ---
 
 # Create Guide Skill
 
-此 Skill 用於建立「組合能力」Guide。
+## Purpose
 
----
+Create composite capability Guide with multi-step implementation flow.
 
-# 定義
+## Scope
 
-Guide =
+Applies to:
+- Multi-step implementation flows
+- Architecture decisions
+- Combining multiple snippets
+- DI / Middleware / Policy setup
 
-- 多步驟流程
-- 涉及架構決策
-- 可能結合多個 snippet
-- 可能建立資料夾結構
-- 可能涉及 DI / Middleware / Policy
+## Rules
 
----
+### Guide Characteristics
 
-# 適用場景
+- Multi-step process
+- Involves architecture decisions
+- May combine multiple snippets
+- May create folder structures
+- May involve DI / Middleware / Policy
 
-- 建立 JWT 驗證流程
-- 建立 UnitOfWork + Transaction Policy
-- 建立 Clean Architecture 模組
-- 建立 EF + Dapper 混用策略
-- 建立 API Gateway 結構
+### File Naming
 
----
+Format: `implement-{feature}-guide.md`
 
-# 建立規則
-
-## 1️ 必須包含步驟流程
-
-範例：
-
-### Step 1 - 建立 Interface  
-### Step 2 - 建立 Implementation  
-### Step 3 - DI 註冊  
-### Step 4 - Middleware 設定  
-
----
-
-## 2️ 可引用 Snippet
-
-Guide 可以使用 snippet：
-
-```
-引用：result-pattern-snippet
-引用：async-local-snippet
-```
-
----
-
-## 3️ 命名規則
-
-```
-implement-{feature}-guide.md
-```
-
-範例：
-
+Examples:
 - implement-jwt-authentication-guide.md
 - implement-unit-of-work-guide.md
 - implement-clean-module-guide.md
 
----
+### Must Include
 
-# Guide 標準模板
+- Step-by-step process
+- Architecture decisions explanation
+- Code examples for each step
+- Can reference snippets
 
+## Anti-Patterns
+
+- Only code without process (that's a snippet)
+- Missing process flow
+- Missing design explanation
+- Single-step guides (should be snippet)
+
+## Minimal Example
+
+**Guide Template:**
 ```markdown
 ---
 name: guide-name
-description: 簡述此 guide 功能
-version: 1.0.0
+description: Brief description of guide functionality
+type: template
+version: 1.2.1
 ---
 
 # Guide Title
 
-## 適用場景
+## Purpose
+When to use this guide.
 
-- 說明何時使用
+## Scope
+Applies to:
+- Architecture/Scenario
 
----
+## Rules
+- Step 1: Create Interface
+- Step 2: Create Implementation
+- Step 3: DI Registration
+- Step 4: Middleware Setup
 
-## 架構決策
+## Anti-Patterns
+- Anti-pattern 1
+- Anti-pattern 2
 
-- 說明為什麼這樣設計
-
----
-
-## Step 1
-
-- 動作
-- 程式碼
-
-## Step 2
-
-- 動作
-- 程式碼
-
----
-
-## 注意事項
-
-- 依賴方向
-- Clean Architecture 限制
-- Transaction 策略
-
----
-
-## 延伸優化
-
-- 效能建議
-- 可擴充點
+## Minimal Example
+[Step-by-step code examples]
 ```
-
----
-
-# 禁止事項
-
-- 不可只是貼程式碼（那是 snippet）
-- 不可缺少流程
-- 不可缺少設計說明
-
----
-
-# Changelog
-
-## 1.0.0
-- Initial version

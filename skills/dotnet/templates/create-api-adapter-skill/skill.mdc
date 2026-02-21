@@ -1,27 +1,40 @@
 ---
-name: create-api-adapter-skill
-description: 建立第三方 API Adapter 結構
-version: 1.0.0
+name: create-api-adapter
+description: Create third-party API Adapter structure
+type: template
+version: 1.2.1
 ---
 
-# Create API Adapter Skill
+# Create API Adapter
 
-用於整合第三方 API。
+## Purpose
 
----
+Create adapter structure for integrating third-party APIs.
 
-## 建立步驟
+## Scope
 
-### Step 1 - 建立資料夾
+Applies to:
+- Infrastructure Layer
+- External service integration
 
-```
-Infrastructure/External/{ProviderName}
-```
+## Rules
 
----
+- Interface defined in Application layer
+- Implementation in Infrastructure layer
+- Use HttpClient for HTTP calls
+- Return Result pattern for error handling
+- Register in DI container
 
-### Step 2 - 建立 Interface（Application 層）
+## Anti-Patterns
 
+- Using HttpClient directly in Application layer
+- Calling third-party API from Controller
+- No error handling
+- Hard-coded endpoints
+
+## Minimal Example
+
+**Interface (Application Layer):**
 ```csharp
 public interface I{ProviderName}Service
 {
@@ -29,10 +42,7 @@ public interface I{ProviderName}Service
 }
 ```
 
----
-
-### Step 3 - 建立 Implementation（Infrastructure 層）
-
+**Implementation (Infrastructure Layer):**
 ```csharp
 public class {ProviderName}Service : I{ProviderName}Service
 {
@@ -51,24 +61,7 @@ public class {ProviderName}Service : I{ProviderName}Service
 }
 ```
 
----
-
-### Step 4 - DI 註冊
-
+**DI Registration:**
 ```csharp
-services.AddHttpClient<IProviderService, ProviderService>();
+services.AddHttpClient<I{ProviderName}Service, {ProviderName}Service>();
 ```
-
----
-
-## ❌ 禁止
-
-- 直接在 Application 使用 HttpClient
-- 在 Controller 呼叫第三方 API
-
----
-
-## Changelog
-
-### 1.0.0
-- Initial version
