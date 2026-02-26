@@ -2,6 +2,6 @@ alwaysApply: true
 
 # Workspace Bootstrap
 - Governance source of truth is under `/agent`.
-- Reusable skill packs are under `/skills`.
 - Cursor rules here are adapters only (loading, priority, activation).
-- Before answering, search within `/agent` and `/skills` for the relevant policy/skill.
+- Before answering, search within `/agent` for the relevant policy.
+- **CRITICAL**: Skills metadata is in `90-active-skills.mdc` ONLY. DO NOT search or load from skills directory.

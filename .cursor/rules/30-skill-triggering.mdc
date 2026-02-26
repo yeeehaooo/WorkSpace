@@ -1,0 +1,41 @@
+---
+alwaysApply: true
+---
+
+# Skill Auto-Triggering
+
+## Trigger Conditions (Priority Order)
+
+1. **Explicit Mention**: User mentions skill name
+2. **Description Match**: Request matches skill description
+3. **Tag Match**: Request matches skill tags
+4. **Context Match**: Current context suggests skill
+
+## Multiple Skills
+
+Can trigger simultaneously if complementary (e.g., structure + pattern).
+
+## Conflict Resolution
+
+1. Prefer explicit mention
+2. Prefer more specific skill
+3. Ask user for clarification
+
+## Anti-Patterns
+
+- ❌ Loading all SKILL.md files upfront
+- ❌ Loading skills that don't match the request
+- ❌ Ignoring description-based triggering
+- ❌ Loading references/ without need
+- ❌ Loading scripts/ into context when they can be executed directly
+
+## Token Optimization (CRITICAL)
+
+**DO NOT load SKILL.md files from `90-active-skills.mdc` paths automatically.**
+
+- `90-active-skills.mdc` paths are for reference only, NOT for auto-loading
+- Only load SKILL.md when skill is explicitly triggered (not all at once)
+- Use metadata (name + description + tags) for discovery (~100 tokens per skill)
+- Load full content only when needed (< 5000 words per skill)
+- Never load all skills' full content simultaneously
+- Loading all 20 skills = ~370K tokens (prohibited)

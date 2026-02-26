@@ -69,3 +69,5 @@ build/
 # Source
 #################################################
 Source/**
+.cursorignore
+.vscode/

@@ -1,0 +1,38 @@
+{
+  "folders": [
+    {
+      "path": "C:/Systex/SystexWorkSpace",
+      "name": "SystexWorkSpace"
+    }
+  ],
+  "settings": {
+    "git.autoRepositoryDetection": "subFolders",
+    "git.openRepositoryInParentFolders": "never",
+    "git.detectSubmodules": true,
+    "git.scanRepositories": [
+      "C:/Systex/SystexWorkSpace/Projects/O1MS10825060010_DMIS_Backend"
+    ],
+    "git.ignoredRepositories": [
+      "."
+    ],
+    "files.exclude": {
+      "**/bin/**": true,
+      "**/obj/**": true,
+      ".vscode": true,
+      ".cursor": true,
+      ".claude": true,
+      ".gitignore": true,
+      ".cursorignore": true,
+      "adapters": true,
+      "agent": true,
+      "docs": true,
+      "skills": true,
+      "Source": true,
+      "tools": true,
+      "Projects/Lab.Todo": true,
+      "Projects/NewTest": true,
+      "AGENTS_RULES.md": true,
+      "AGENTS.md": true,
+    }
+  }
+}

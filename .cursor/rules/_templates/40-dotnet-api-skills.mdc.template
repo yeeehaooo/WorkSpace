@@ -1,0 +1,141 @@
+---
+globs: *.cs,*.csproj,*.sln,*.slnx
+description: .NET API development skills and patterns
+---
+
+# .NET API Development Skills
+
+When developing .NET API projects, automatically apply the following skills based on context:
+
+## Required Skills (Auto-Triggered)
+
+### Structure Skills
+
+1. **dmis** (or **clean**)
+   - **When**: Creating new .NET API projects or working with enterprise backend structure
+   - **Triggers**: "API endpoint", "controller", "vertical slice", "clean architecture"
+   - **Load**: `/skills/dotnet/structures/dmis/SKILL.md` or `/skills/dotnet/structures/clean/SKILL.md`
+   - **Applies to**: Project structure, layer organization, folder conventions
+
+### Pattern Skills (Context-Based)
+
+2. **unit-of-work**
+   - **When**: Implementing command handlers, database transactions, atomic operations
+   - **Triggers**: "transaction", "atomic", "command handler", "save changes"
+   - **Load**: `/skills/dotnet/patterns/unit-of-work/SKILL.md`
+   - **Applies to**: Command handlers, write operations, transaction boundaries
+
+3. **result-wrapper**
+   - **When**: Error handling, returning operation results, avoiding exceptions for control flow
+   - **Triggers**: "error handling", "result", "success/failure", "operation result"
+   - **Load**: `/skills/dotnet/patterns/result-wrapper/SKILL.md`
+   - **Applies to**: All command/query handlers, service methods
+
+4. **domain-event**
+   - **When**: Domain entities need to publish events, decouple side effects
+   - **Triggers**: "domain event", "event", "publish", "notify", "side effect"
+   - **Load**: `/skills/dotnet/patterns/domain-event/SKILL.md`
+   - **Applies to**: Domain layer, aggregate roots, event-driven scenarios
+
+5. **outbox**
+   - **When**: Reliable event publishing, solving dual-write problem
+   - **Triggers**: "reliable event", "event publishing", "dual write", "eventual consistency"
+   - **Load**: `/skills/dotnet/patterns/outbox/SKILL.md`
+   - **Applies to**: Event publishing, message delivery, integration events
+
+6. **transaction-policy**
+   - **When**: Defining transaction boundaries, consistency requirements
+   - **Triggers**: "transaction policy", "consistency", "transaction boundary"
+   - **Load**: `/skills/dotnet/patterns/transaction-policy/SKILL.md`
+   - **Applies to**: Transaction management, consistency strategies
+
+7. **caching-strategy**
+   - **When**: Implementing caching, data access optimization
+   - **Triggers**: "cache", "caching", "performance", "data access"
+   - **Load**: `/skills/dotnet/patterns/caching-strategy/SKILL.md`
+   - **Applies to**: Data access patterns, read operations
+
+8. **execution-tracking**
+   - **When**: Observability, auditing, debugging handler execution
+   - **Triggers**: "logging", "audit", "tracking", "observability"
+   - **Load**: `/skills/dotnet/patterns/execution-tracking/SKILL.md`
+   - **Applies to**: Cross-cutting concerns, handler decorators
+
+9. **pipeline-decorator**
+   - **When**: Cross-cutting concerns, handler pipelines
+   - **Triggers**: "decorator", "pipeline", "cross-cutting", "middleware"
+   - **Load**: `/skills/dotnet/patterns/pipeline-decorator/SKILL.md`
+   - **Applies to**: Handler decorators, cross-cutting concerns
+
+10. **retry-policy**
+    - **When**: Handling transient failures, external dependencies
+    - **Triggers**: "retry", "transient", "failure", "resilience"
+    - **Load**: `/skills/dotnet/patterns/retry-policy/SKILL.md`
+    - **Applies to**: External service calls, transient error handling
+
+## Generator Skills (On-Demand)
+
+11. **create-clean-module**
+    - **When**: Creating new business modules
+    - **Triggers**: "new module", "create module", "business module"
+    - **Load**: `/skills/dotnet/generators/create-clean-module/SKILL.md`
+
+12. **create-domain-aggregate**
+    - **When**: Creating new aggregate roots
+    - **Triggers**: "aggregate", "aggregate root", "domain entity"
+    - **Load**: `/skills/dotnet/generators/create-domain-aggregate/SKILL.md`
+
+13. **create-repository**
+    - **When**: Creating repository implementations
+    - **Triggers**: "repository", "data access", "persistence"
+    - **Load**: `/skills/dotnet/generators/create-repository/SKILL.md`
+
+## Skill Loading Rules
+
+### Progressive Disclosure
+
+1. **Metadata First**: Use metadata from `90-active-skills.mdc` for discovery (~100 tokens/skill)
+2. **Triggered Load**: Load full SKILL.md only when:
+   - Explicit mention of skill name
+   - Description matches user request
+   - Tag matches context
+   - Context suggests skill is needed
+3. **Resources**: Load references/scripts/assets only when explicitly needed
+
+### Multiple Skills
+
+- Can trigger multiple skills simultaneously if complementary
+- Example: `unit-of-work` + `result-wrapper` + `domain-event` for command handlers
+- Example: `dmis` structure + `create-clean-module` when creating new modules
+
+## Anti-Patterns
+
+- ❌ Loading all skills upfront (causes 370K+ tokens)
+- ❌ Ignoring structure skills when creating new files
+- ❌ Using exceptions for control flow (use result-wrapper instead)
+- ❌ Direct database access in API layer (use repository pattern)
+- ❌ Business logic in controllers (use command/query handlers)
+
+## Quick Reference
+
+**Creating API Endpoint:**
+1. Load `dmis` or `clean` structure skill
+2. Follow vertical slice organization
+3. Use result-wrapper for responses
+4. Use unit-of-work for transactions
+
+**Creating Command Handler:**
+1. Load `unit-of-work` pattern
+2. Load `result-wrapper` pattern
+3. Consider `domain-event` if events needed
+4. Use `execution-tracking` for observability
+
+**Creating Domain Entity:**
+1. Load `create-domain-aggregate` generator
+2. Consider `domain-event` if events needed
+3. Follow DDD principles from structure skill
+
+**Creating Repository:**
+1. Load `create-repository` generator
+2. Load `unit-of-work` for transaction management
+3. Consider `caching-strategy` for read operations

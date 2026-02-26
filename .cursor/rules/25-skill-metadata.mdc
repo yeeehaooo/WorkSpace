@@ -1,0 +1,30 @@
+---
+alwaysApply: true
+---
+
+# Skill Metadata Registry
+
+**CRITICAL: `90-active-skills.mdc` contains ONLY metadata. DO NOT load full SKILL.md files automatically.**
+
+[Auto-generated from project-profile.json - metadata only (name + description + tags)]
+
+**CRITICAL Loading Rules:**
+- Paths in `90-active-skills.mdc` are for reference only, NOT for auto-loading
+- DO NOT automatically load `/skills/{path}/SKILL.md` from listed paths
+- Load full SKILL.md ONLY when skill is triggered by user request
+- NEVER load all SKILL.md files upfront
+- Use metadata for discovery, load body only when triggered
+
+## Progressive Disclosure (Token Optimization)
+
+Three-level loading to minimize token usage:
+
+1. **Metadata Only** (~100 tokens/skill): name + description + tags
+2. **SKILL.md Body** (triggered): Load only when skill matches request
+3. **Resources** (explicit): Load references/scripts/assets only when needed
+
+## External Claude Skills
+
+External skills available on-demand (not in active skills list):
+- Common: docx, pdf, pptx, xlsx, skill-creator, mcp-builder
+- Load only when task matches skill description

@@ -1,0 +1,77 @@
+---
+name: {skill-name}
+description: |
+  {One sentence core description}
+
+  Use when:
+  - {Specific scenario 1}
+  - {Specific scenario 2}
+  - {Specific scenario 3}
+  - {Specific scenario 4}
+  - {Specific scenario 5}
+
+  Triggers: "{keyword1}", "{keyword2}", "{keyword3}", "{keyword4}", "{keyword5}"
+type: {pattern|structure|generator|template}
+version: 1.0.0
+tags:
+  - dotnet
+  - {category1}
+  - {category2}
+  - {category3}
+---
+
+# {Skill Title}
+
+## Purpose
+
+{One to two sentences describing the skill's core value and purpose.}
+
+## Scope
+
+Applies to:
+- {Applicable scenario 1}
+- {Applicable scenario 2}
+- {Applicable scenario 3}
+
+## Rules
+
+{Structured, executable rules. Use bullet points or numbered list.}
+
+- Rule 1: {Description}
+- Rule 2: {Description}
+- Rule 3: {Description}
+
+## Anti-Patterns
+
+{Specific, avoidable anti-patterns.}
+
+- ❌ {Anti-pattern 1}
+- ❌ {Anti-pattern 2}
+- ❌ {Anti-pattern 3}
+
+## Minimal Example
+
+{Minimal but complete code example.}
+
+```csharp
+// Example code here
+public class Example
+{
+    // Implementation
+}
+```
+
+## Advanced Usage
+
+{Optional: Advanced usage patterns or combinations with other skills.}
+
+## References
+
+{Optional: Links to reference files in references/ directory.}
+
+- See [advanced-patterns.md](references/advanced-patterns.md) for detailed patterns
+- See [integration-guide.md](references/integration-guide.md) for integration examples
+
+## Notes
+
+{Optional: Additional notes or considerations.}
